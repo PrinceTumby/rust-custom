@@ -25,7 +25,6 @@
 [submodule "src/llvm-project"]
 	path = src/llvm-project
 	url = https://github.com/PrinceTumby/llvm-custom.git
-	branch = rustc/21.1-2025-08-01
 	shallow = true
 [submodule "src/doc/embedded-book"]
 	path = src/doc/embedded-book
