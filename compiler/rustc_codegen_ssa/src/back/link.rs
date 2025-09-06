@@ -3068,6 +3068,8 @@ fn add_apple_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavo
         "arm64" => "arm64",
         "arm64e" => "arm64e",
         "arm64_32" => "arm64_32",
+        "powerpc" => "powerpc",
+        "powerpc64" => "powerpc64",
         // ld64 doesn't understand i686, so fall back to i386 instead.
         //
         // Same story when linking with cc, since that ends up invoking ld64.
@@ -3158,7 +3160,11 @@ fn add_apple_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavo
         // Like with `-arch`, the linker can figure out the platform versions
         // itself from the binaries being linked, but to be safe, we specify
         // the desired versions here explicitly.
-        cmd.link_args(&["-platform_version", platform_name, &*min_version, sdk_version]);
+        match ld64_arch {
+            "powerpc" | "powerpc64" => cmd
+                .link_args(&["-macosx_version_min", "10.4"]),
+            _ => cmd.link_args(&["-platform_version", platform_name, &*min_version, sdk_version]),
+        };
     } else {
         // cc == Cc::Yes
         //
