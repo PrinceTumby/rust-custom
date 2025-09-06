@@ -2632,7 +2632,6 @@ dependencies = [
 [[package]]
 name = "object"
 version = "0.37.3"
-source = "git+https://github.com/PrinceTumby/object#f2539be1c17b1a74c8472d81167efb5da17398a8"
 dependencies = [
  "crc32fast",
  "flate2",
